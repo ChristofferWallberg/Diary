@@ -1,21 +1,21 @@
 import java.util.Date;
 
 public class DiaryEntries {
-    private Users user;
+    private User user;
     private String title;
     private Date date;
 
-    public DiaryEntries(Users user, String title, Date date) {
+    public DiaryEntries(User user, String title, Date date) {
         this.user = user;
         this.title = title;
         this.date = date;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

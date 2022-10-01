@@ -1,12 +1,16 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        Skapar upp meny 1 och 2.
         Menu.menu1();
         Menu.menu2();
+        List<User> users = new ArrayList<>(List.of(JsonUtils.gsonReadUserToFile()));
+        System.out.println(users);
         //Scanner för att hantera menyval.
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -22,12 +26,18 @@ public class Main {
         do {
             Menu.getMenu(menu);
             choice = scanner.nextInt();
-            if (choice == 1) {
-                menu = 2;
+            if (menu == 1 && choice == 1) {
+                for (User user : users)
+                    System.out.println(user.getUsername());
             }
-        }while(choice!=3);
-
-
-//        Menu.getMenu(choice);
+            if (menu == 1 && choice == 2) {
+                System.out.println("Ange användarnamn: ");
+                User newUser = new User(scanner.next());
+                users.add(newUser);
+                JsonUtils.gsonWriteUserToFile(users);
+                for (User user : users)
+                    System.out.println(user.getUsername());
+            }
+        } while (choice != 3);
     }
 }
