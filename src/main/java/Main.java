@@ -66,6 +66,7 @@ public class Main {
                             if (user.getUsername().getCurrentUser().equalsIgnoreCase(currentUser.getCurrentUser())) {
                                 System.out.println(diaryEntries.get(0).getText());
                             }
+                            //TODO Varför hoppar loopen över den här if satsen nedan? Har provat debugga men vad än ovan if ger för resultat går den direkt till break i case 1...
                             if (!(user.getUsername().getCurrentUser().equalsIgnoreCase(currentUser.getCurrentUser()))) {
                                 System.out.println("Du har inga inlägg.");
                             }
