@@ -9,6 +9,7 @@ public class Menu {
         ArrayList options = new ArrayList<>();
         options.add("Välj användare");
         options.add("Skapa ny användare");
+        options.add(options.size(),"Avsluta");
         menus.put(1, options);
 
     }
@@ -18,6 +19,7 @@ public class Menu {
         ArrayList options = new ArrayList<>();
         options.add("Läs inlägg");
         options.add("Skriv inlägg");
+        options.add(options.size(),"Avsluta");
         menus.put(2, options);
     }
 
@@ -28,6 +30,9 @@ public class Menu {
             System.out.println(i + ". " + options);
             i++;
         }
-        System.out.println("3. Avsluta");
+    }
+
+    public static Map<Integer, List<String>> getMenus() {
+        return menus;
     }
 }

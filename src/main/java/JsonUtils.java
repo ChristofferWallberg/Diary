@@ -2,7 +2,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JsonUtils {
@@ -21,7 +20,7 @@ public class JsonUtils {
         jsonFileWrite.close();
     }
 
-    public static User[] gsonReadUserToFile() throws FileNotFoundException {
+    public static User[] gsonReadUserFromFile() throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader rf = new BufferedReader(fr);
 
