@@ -1,27 +1,40 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DiaryEntry {
-    private User username;
+    private User user;
     private String title;
     private String text;
     private Date dateStamp;
+    private List<DiaryEntry> diaryEntries = new ArrayList<>();
 
-    public DiaryEntry(User username, String title, String text) {
-        this.username = username;
+    public DiaryEntry(User user, String title, String text) {
+        this.user = user;
         this.title = title;
         this.text = text;
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         dateStamp = new Date();
     }
 
-    public User getUsername() {
-        return username;
+    public DiaryEntry(List<DiaryEntry> diaryEntries) {
+        this.diaryEntries = diaryEntries;
     }
 
-    public void setUsername(User username) {
-        this.username = username;
+    public List<DiaryEntry> getDiaryEntries() {
+        return diaryEntries;
+    }
+
+    public void setDiaryEntries(List<DiaryEntry> diaryEntries) {
+        this.diaryEntries = diaryEntries;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {

@@ -3,12 +3,16 @@ import java.util.List;
 
 public class Diary {
     private User user;
-    private List<DiaryEntry> diary = new ArrayList();
+    private List<DiaryEntry> diary = new ArrayList<>();
     private List<Diary> diaries = new ArrayList<>();
 
-    public Diary(User user) {
+    public Diary(User user, List<DiaryEntry> diary) {
         this.user = user;
-        this.diary = new ArrayList<>();
+        this.diary = diary;
+    }
+
+    public Diary(List<Diary> diaries) {
+        this.diaries = diaries;
     }
 
     public User getUser() {

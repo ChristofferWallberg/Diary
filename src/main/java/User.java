@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
-    private final String username;
-    private String currentUser;
+    private String username;
+    private static String currentUserName;
+    private static User currentUser;
 
     public User(String username) {
         this.username = username;
@@ -13,12 +11,24 @@ public class User {
         return username;
     }
 
-    public String getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(String currentUser) {
-        this.currentUser = currentUser;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        User.currentUser = currentUser;
+    }
+
+    public static String getCurrentUserName() {
+        return currentUserName;
+    }
+
+    public static void setCurrentUserName(String currentUserName) {
+        User.currentUserName = currentUserName;
     }
 
     @Override
