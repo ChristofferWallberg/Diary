@@ -1,19 +1,20 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Diary {
     private User user;
-    private List<DiaryEntry> diary = new ArrayList<>();
-    private List<Diary> diaries = new ArrayList<>();
+    private List<DiaryEntry> diary;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
-    public Diary(User user, List<DiaryEntry> diary) {
+
+
+    public Diary(User user) {
         this.user = user;
-        this.diary = diary;
+        this.diary = new ArrayList<>();
     }
 
-    public Diary(List<Diary> diaries) {
-        this.diaries = diaries;
-    }
 
     public User getUser() {
         return user;
@@ -30,12 +31,13 @@ public class Diary {
     public void setDiary(List<DiaryEntry> diary) {
         this.diary = diary;
     }
-
-    public List<Diary> getDiaries() {
-        return diaries;
-    }
-
-    public void setDiaries(List<Diary> diaries) {
-        this.diaries = diaries;
+    public void printDiaryEntries() {
+        for (DiaryEntry diaryEntry : diary) {
+            String formatedDatetime = dateFormat.format(diaryEntry.getDateTimeStamp());
+            System.out.println("Användare: " + diaryEntry.getUser());
+            System.out.println("Titel av inlägg: " + diaryEntry.getTitle());
+            System.out.println("Inläggets text: " + diaryEntry.getText());
+            System.out.println("Datum och tid när inlägget skapades: " + diaryEntry.getDateTimeStamp());
+        }
     }
 }

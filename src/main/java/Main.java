@@ -1,7 +1,6 @@
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -9,12 +8,12 @@ public class Main {
         Menu.menu1();
         Menu.menu2();
         List<User> users = new ArrayList<>(List.of(JsonUtils.gsonReadUserFromFile()));
+        List<Diary> diaries = new ArrayList<>();
+
+
+//        Diary diary = new Diary();
+//        DiaryEntry diaryEntry = new DiaryEntry(diary);
         System.out.println(users);
-//        User currentUser = new User("currentUser");
-//        currentUser.setCurrentUser();
-//        Diary diary = new Diary(null);
-//        List<DiaryEntry> diaryEntries = new ArrayList<>();
-//        List<Diary> diaries = new ArrayList<>();
 
         //Scanner för att hantera menyval.
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +26,9 @@ public class Main {
 //        3. Avsluta
 //        Var kvar i loopen tills att du Valt en användare -> Gå till meny 2. Öka eller minska counter för att gå mellan
 //        menyer?
-        System.out.println(Menu.getMenus().get(1).size());
+        for (Diary diary : diaries) {
+            System.out.println("User of Diary: " + diary.getUser());
+        }
 
         do {
             if (menu == 1) {
@@ -49,66 +50,67 @@ public class Main {
                             }
                         }
                         break;
+                    // Create new user and a new Diary for the user. Add this Diary to the list of diaries.
                     case 2:
                         System.out.println("Ange användarnamn: ");
                         User newUser = new User(scanner.next());
                         users.add(newUser);
                         JsonUtils.gsonWriteUserToFile(users);
+                        Diary newUserDiary = new Diary(newUser);
+                        diaries.add(newUserDiary);
+                        for (Diary diary : diaries) {
+                            System.out.println("User of Diary: " + diary.getUser());
+                        }
                         for (User user : users)
                             System.out.println(user.getUsername());
-                    break;
+                        break;
                     case 3:
-                        for (Diary diary1 : diaries) {
-                            System.out.println(diary1.getDiaries().toString());
+                        for (Diary diary : diaries) {
+                            System.out.println("Users with Diary: " + diary.getUser());
                         }
                         break;
                 }
             }
+            // Menu for logged in user
             if (menu == 2) {
                 System.out.println("Användare: " + User.getCurrentUser().getUsername());
                 Menu.getMenu(menu);
                 choice = scanner.nextInt();
                 switch (choice) {
-                    List<Diary> diaries = new ArrayList<>();
-                    List<DiaryEntry> diaryEntries = new ArrayList<>();
-                    diaryEntries = new ArrayList<>();
 
                     //Read entries for current user
                     case 1:
-//                        for (DiaryEntry readDiaryEntry : diaryEntries) {
-//                            //TODO Varför hoppar loopen över den här if satsen nedan? Har provat debugga men vad än ovan if ger för resultat går den direkt till break i case 1...
-////                            if (!(diaryEntry.getUser().getCurrentUser().equals(User.getCurrentUser()))) {
-////                                System.out.println("Du har inga inlägg.");
-//                            }
-                            Diary diary;
-                            if (User.getCurrentUser().getUsername().equalsIgnoreCase(diary.getDiary().get(0).getUser().getUsername())) {
+                        for (Diary diary : diaries) {
+                            if (Objects.equals(User.getCurrentUser().getUsername(), diary.getUser().getUsername())) {
                                 for (Diary currentDiary : diaries) {
-                                    System.out.println(currentDiary);
+                                    currentDiary.printDiaryEntries();
                                 }
                             }
-                            break;
-                            case 2:
-                                DiaryEntry diaryEntry = new DiaryEntry(User.getCurrentUser(), "Dag1", "text");
-
-                                diary = new Diary(diaryEntry.getUser(), diaryEntries);
-
-                                diaries.add(diary);
-//                        diaryEntries.add(diaryEntry);
-//                        diary.setDiary(diaryEntries);
-//                        diaries.add(diary);
-                                System.out.println("Användare: " + diaryEntry.getUser() +
-                                        "\nMocktext: " + diaryEntry.getText() +
-                                        "\nMocktitel: " + diaryEntry.getTitle());
-                                break;
-                            case 3:
-                                menu = 1;
-                                break;
-                            case 4:
-                                break;
-                            default:
-                                System.out.println("Ogiltigt val, skriv in siffra från menyvalet.");
                         }
+                        break;
+                    //Create a Diary entry and put it inside current users Diary.
+                    case 2:
+                        DiaryEntry diaryEntry = new DiaryEntry(User.getCurrentUser(), "Dag1", "text");
+                        for (Diary diary : diaries) {
+                            if (Objects.equals(User.getCurrentUser().getUsername(), diary.getUser().getUsername())) {
+                                diary.getDiary().add(diaryEntry);
+                            } else {
+                                System.out.println("User have no diary to write in.");
+                            }
+                        }
+                        System.out.println("Användare: " + diaryEntry.getUser() +
+                                "\nMocktext: " + diaryEntry.getText() +
+                                "\nMocktitel: " + diaryEntry.getTitle());
+                        break;
+                    case 3:
+                        menu = 1;
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        System.out.println("Ogiltigt val, skriv in siffra från menyvalet.");
                 }
+            }
         } while (choice != Menu.getMenus().get(menu).size());
     }
 }
