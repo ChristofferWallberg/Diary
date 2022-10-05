@@ -8,7 +8,6 @@ public class Menu {
         ArrayList options = new ArrayList<>();
         options.add("Välj användare");
         options.add("Skapa ny användare");
-        options.add("Visa dagböcker");
         options.add(options.size(),"Avsluta");
         menus.put(1, options);
 

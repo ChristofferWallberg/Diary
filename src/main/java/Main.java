@@ -1,25 +1,22 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        Skapar upp meny 1 och 2.
+        // Init menu1 and menu2.
         Menu.menu1();
         Menu.menu2();
+        // Create lists for users and diaries from Json-files. If no files are present empty lists are created instead.
         List<User> users = new ArrayList<>(List.of(JsonUtils.gsonReadUserFromFile()));
         List<Diary> diaries = new ArrayList<>(List.of(JsonUtils.gsonReadDiariesFromFile()));
 
-
-//        Diary diary = new Diary();
-//        DiaryEntry diaryEntry = new DiaryEntry(diary);
-        System.out.println(users);
-
-        //Scanner för att hantera menyval.
+        //Scanner for inputs
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
-        //Börja på meny 1 innan man skrivit in en giltig användare för att komma åt meny 2.
+        //Begin at menu 1 before you have chosen a user.
         int menu = 1;
-//        Meny som visar:
+//        Menu that shows options:
 //        1. Välj användare
 //        2. Skapa ny användare
 //        3. Avsluta
@@ -30,7 +27,7 @@ public class Main {
                 try {
                     choice = scanner.nextInt();
                     switch (choice) {
-                        //Välj användare
+                        //Choose user
                         case 1:
                             for (User user : users) {
                                 System.out.println(user);
@@ -59,11 +56,6 @@ public class Main {
                             }
                             for (User user : users)
                                 System.out.println(user.getUsername());
-                            break;
-                        case 3:
-                            for (Diary diary : diaries) {
-                                System.out.println("Users with Diary: " + diary.getUser());
-                            }
                             break;
                     }
                 } catch (InputMismatchException e) {
@@ -123,7 +115,6 @@ public class Main {
                 } catch (InputMismatchException e) {
                     System.out.println("Du skrev något fel! Var god endast ange siffran för menyvalet.");
                     scanner.nextLine();
-                    choice = 0;
                 }
             }
         } while (choice != Menu.getMenus().get(menu).size());

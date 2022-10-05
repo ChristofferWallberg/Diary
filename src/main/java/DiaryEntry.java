@@ -1,22 +1,17 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+
 
 public class DiaryEntry {
     private User user;
     private String title;
     private String text;
-    private Date dateTimeStamp;
+    private LocalDateTime localDateTime;
 
     public DiaryEntry(User user, String title, String text) {
         this.user = user;
         this.title = title;
         this.text = text;
-        Date date = new Date();
-        dateTimeStamp = Calendar.getInstance().getTime();
+        this.localDateTime = LocalDateTime.now();
     }
 
     public User getUser() {
@@ -31,7 +26,7 @@ public class DiaryEntry {
         return text;
     }
 
-    public Date getDateTimeStamp() {
-        return dateTimeStamp;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 }
