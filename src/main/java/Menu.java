@@ -26,9 +26,9 @@ public class Menu {
     // HashMap[1{"välj", "skapa"}, 2{"läs inlägg", "skriv"}] ->
     public static void getMenu(int x) {
         int i = 1;
-        System.out.println("Vad god ange siffra för menyval: ");
+        System.out.println("Var god och ange en siffra för menyval: ");
         for (String options : menus.get(x)) {
-            System.out.println(i + ") " + options);
+            System.out.println("\t" + i + ") " + options);
             i++;
         }
     }

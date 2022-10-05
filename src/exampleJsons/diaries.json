@@ -1,0 +1,72 @@
+[
+  {
+    "user": {
+      "username": "Chris"
+    },
+    "diary": [
+      {
+        "user": {
+          "username": "Chris"
+        },
+        "title": "Första",
+        "text": "inlägget",
+        "dateTimeStamp": "Oct 5, 2022, 10:58:45 AM"
+      },
+      {
+        "user": {
+          "username": "Chris"
+        },
+        "title": "",
+        "text": "andra",
+        "dateTimeStamp": "Oct 5, 2022, 10:59:55 AM"
+      }
+    ]
+  },
+  {
+    "user": {
+      "username": "Grobo"
+    },
+    "diary": [
+      {
+        "user": {
+          "username": "Grobo"
+        },
+        "title": "Första",
+        "text": "inlägget",
+        "dateTimeStamp": "Oct 5, 2022, 11:01:54 AM"
+      },
+      {
+        "user": {
+          "username": "Grobo"
+        },
+        "title": "java.util.Scanner[delimiters\u003d\\p{javaWhitespace}+][position\u003d11][match valid\u003dtrue][need input\u003dfalse][source closed\u003dfalse][skipped\u003dfalse][group separator\u003d\\x{a0}][decimal separator\u003d\\x{2c}][positive prefix\u003d][negative prefix\u003d\\Q−\\E][positive suffix\u003d][negative suffix\u003d][NaN string\u003d\\QNaN\\E][infinity string\u003d\\Q∞\\E]",
+        "text": "java.util.Scanner[delimiters\u003d\\p{javaWhitespace}+][position\u003d11][match valid\u003dtrue][need input\u003dfalse][source closed\u003dfalse][skipped\u003dfalse][group separator\u003d\\x{a0}][decimal separator\u003d\\x{2c}][positive prefix\u003d][negative prefix\u003d\\Q−\\E][positive suffix\u003d][negative suffix\u003d][NaN string\u003d\\QNaN\\E][infinity string\u003d\\Q∞\\E]",
+        "dateTimeStamp": "Oct 5, 2022, 11:25:34 AM"
+      },
+      {
+        "user": {
+          "username": "Grobo"
+        },
+        "title": "",
+        "text": "asd",
+        "dateTimeStamp": "Oct 5, 2022, 11:33:26 AM"
+      },
+      {
+        "user": {
+          "username": "Grobo"
+        },
+        "title": "Första",
+        "text": "Första",
+        "dateTimeStamp": "Oct 5, 2022, 11:38:43 AM"
+      },
+      {
+        "user": {
+          "username": "Grobo"
+        },
+        "title": "Funkar det?",
+        "text": "Nu då???",
+        "dateTimeStamp": "Oct 5, 2022, 11:52:45 AM"
+      }
+    ]
+  }
+]

@@ -10,7 +10,6 @@ public class DiaryEntry {
     private String title;
     private String text;
     private Date dateTimeStamp;
-    private List<DiaryEntry> diaryEntries = new ArrayList<>();
 
     public DiaryEntry(User user, String title, String text) {
         this.user = user;

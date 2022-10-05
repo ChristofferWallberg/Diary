@@ -6,9 +6,6 @@ import java.util.List;
 public class Diary {
     private User user;
     private List<DiaryEntry> diary;
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-
 
     public Diary(User user) {
         this.user = user;
@@ -33,7 +30,6 @@ public class Diary {
     }
     public void printDiaryEntries() {
         for (DiaryEntry diaryEntry : diary) {
-            String formatedDatetime = dateFormat.format(diaryEntry.getDateTimeStamp());
             System.out.println("Användare: " + diaryEntry.getUser());
             System.out.println("Titel av inlägg: " + diaryEntry.getTitle());
             System.out.println("Inläggets text: " + diaryEntry.getText());
