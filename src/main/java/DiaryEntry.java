@@ -1,32 +1,31 @@
 import java.time.LocalDateTime;
 
-
 public class DiaryEntry {
-    private User user;
-    private String title;
-    private String text;
-    private LocalDateTime localDateTime;
+    private final User USER;
+    private final String TITLE;
+    private final String TEXT;
+    private final LocalDateTime LOCALDATETIME;
 
-    public DiaryEntry(User user, String title, String text) {
-        this.user = user;
-        this.title = title;
-        this.text = text;
-        this.localDateTime = LocalDateTime.now();
+    public DiaryEntry(User USER, String TITLE, String TEXT) {
+        this.USER = USER;
+        this.TITLE = TITLE;
+        this.TEXT = TEXT;
+        this.LOCALDATETIME = LocalDateTime.now();
     }
 
-    public User getUser() {
-        return user;
+    public User getUSER() {
+        return USER;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTITLE() {
+        return TITLE;
     }
 
-    public String getText() {
-        return text;
+    public String getTEXT() {
+        return TEXT;
     }
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return LOCALDATETIME;
     }
 }

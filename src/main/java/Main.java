@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Main {
@@ -29,33 +28,54 @@ public class Main {
                     switch (choice) {
                         //Choose user
                         case 1:
-                            for (User user : users) {
-                                System.out.println(user);
-                            }
-                            System.out.println("Ange användarnamn: ");
-                            String currentUser = scanner.next();
-                            for (User user : users) {
-                                if (user.getUsername().equalsIgnoreCase(currentUser)) {
-                                    User.setCurrentUser(user);
-                                    menu = 2;
-                                    break;
+                            System.out.println("\t1) Fortsätt\n" +
+                                    "\t2) Avbryt");
+                            choice = scanner.nextInt();
+                            if (choice == 2) {
+                                break;
+                            } else if (choice == 1) {
+                                System.out.println("Skriv in någon av följande användare för att logga in: ");
+                                User.printAllUsers(users);
+
+                                System.out.println("Ange användarnamn: ");
+                                String currentUser = scanner.next();
+                                if(users.stream()
+                                        .noneMatch(user -> user.getUsername().equalsIgnoreCase(currentUser))) {
+                                    System.out.println("Användaren finns inte!");
                                 }
+                                for (User user : users) {
+                                    if (user.getUsername().equalsIgnoreCase(currentUser)) {
+                                        User.setCURRENTUSER(user);
+                                        menu = 2;
+                                        break;
+                                    }
+                                }
+                                break;
                             }
+                            System.out.println("Du angav inte ett giltigt val, försök igen.");
+                            choice = 0;
                             break;
                         // Create new user and a new Diary for the user. Add this Diary to the list of diaries.
                         case 2:
-                            System.out.println("Ange användarnamn: ");
-                            User newUser = new User(scanner.next());
-                            users.add(newUser);
-                            JsonUtils.gsonWriteUserToFile(users);
-                            Diary newUserDiary = new Diary(newUser);
-                            diaries.add(newUserDiary);
-                            JsonUtils.gsonWriteDiaryToFile(diaries);
-                            for (Diary diary : diaries) {
-                                System.out.println("User of Diary: " + diary.getUser());
+                            System.out.println("\t1) Fortsätt\n" +
+                                    "\t2) Avbryt");
+                            choice = scanner.nextInt();
+                            if (choice == 2) {
+                                break;
+                            } else if (choice == 1) {
+                                System.out.println("Upptagna användarnamn: ");
+                                User.printAllUsers(users);
+                                choice = 2;
+                                System.out.println("Ange användarnamn: ");
+                                String addUser = scanner.next();
+                                // Check if the username is already taken
+                                boolean userExists;
+                                userExists = User.checkIfUserExist(users, addUser);
+                                User.createUser(userExists, users, diaries, addUser);
+                                break;
                             }
-                            for (User user : users)
-                                System.out.println(user.getUsername());
+                            System.out.println("Du angav inte ett giltigt val, försök igen.");
+                            choice = 0;
                             break;
                     }
                 } catch (InputMismatchException e) {
@@ -65,48 +85,48 @@ public class Main {
             }
             // Menu for logged in user
             if (menu == 2) {
-                System.out.println("Användare: " + User.getCurrentUser().getUsername());
+                User.getLoggedInUser();
                 Menu.getMenu(menu);
                 try {
                     choice = scanner.nextInt();
                     switch (choice) {
-                        //Read entries for current user
+                        //Read entries for current users diary
                         case 1:
-                            for (Diary diary : diaries) {
-                                if (Objects.equals(User.getCurrentUser().getUsername(), diary.getUser().getUsername()) && !(diary.getDiary().isEmpty())) {
-                                    for (Diary currentDiary : diaries) {
-                                        currentDiary.printDiaryEntries();
-                                    }
-                                } else if (diary.getDiary().isEmpty()) {
-                                    System.out.println("Du har inga inlägg! Skriv några inlägg vettja!");
-                                    break;
-                                }
+                            for (Diary currentDiary : diaries) {
+                                currentDiary.printDiaryEntriesCurrentUser(currentDiary);
                             }
                             break;
                         //Create a Diary entry and put it inside current users Diary.
                         case 2:
-                            System.out.println("Skriv titel på dagboksinlägget: ");
-                            scanner.nextLine();
-                            String scannerTitle = scanner.nextLine();
-                            System.out.println("Skriv texten till dagboksinlägget: ");
-                            String scannerText = scanner.nextLine();
-
-                            DiaryEntry diaryEntry = new DiaryEntry(User.getCurrentUser(), scannerTitle, scannerText);
-                            for (Diary diary : diaries) {
-                                if (Objects.equals(User.getCurrentUser().getUsername(), diary.getUser().getUsername())) {
-                                    diary.getDiary().add(diaryEntry);
-                                    JsonUtils.gsonWriteDiaryToFile(diaries);
-                                } else {
-                                    System.out.println("User have no diary to write in.");
-                                }
+                            System.out.println("\t1) Fortsätt\n" +
+                                    "\t2) Avbryt");
+                            choice = scanner.nextInt();
+                            if (choice == 2) {
+                                break;
+                            } else if (choice == 1) {
+                                System.out.println("Skriv titel på dagboksinlägget: ");
+                                scanner.nextLine();
+                                String scannerTitle = scanner.nextLine();
+                                System.out.println("Skriv texten till dagboksinlägget: ");
+                                String scannerText = scanner.nextLine();
+                                // Create new diary entry for the current user and puts it in the users diary.
+                                DiaryEntry diaryEntry = Diary.createNewDiaryEntry(diaries, scannerTitle, scannerText);
+                                System.out.println("Inlägg skapat: " +
+                                        "\nAnvändare: " + diaryEntry.getUSER() +
+                                        "\nMocktitel: " + diaryEntry.getTITLE() +
+                                        "\nMocktext: " + diaryEntry.getTEXT() +
+                                        "\n----------------------------------------------");
+                            } else {
+                                System.out.println("Du angav inte ett giltigt val, försök igen.");
+                                choice = 0;
                             }
-                            System.out.println("Användare: " + diaryEntry.getUser() +
-                                    "\nMocktext: " + diaryEntry.getText() +
-                                    "\nMocktitel: " + diaryEntry.getTitle());
                             break;
+                        // Going back to menu 1 (log off)
                         case 3:
                             menu = 1;
+                            choice = 0;
                             break;
+                        // Break the loop and terminates the application as choice = 4 which is last index of the menu
                         case 4:
                             break;
                         default:
@@ -117,7 +137,7 @@ public class Main {
                     scanner.nextLine();
                 }
             }
-        } while (choice != Menu.getMenus().get(menu).size());
+        } while (choice != Menu.getMENUS().get(menu).size());
         System.out.println("Hej då! Välkommen åter!");
     }
 }

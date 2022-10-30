@@ -35,7 +35,8 @@ public class JsonUtils {
             return new User[]{};
         }
     }
-    public static void gsonWriteDiaryToFile(List<Diary> diaries ) throws IOException {
+
+    public static void gsonWriteDiaryToFile(List<Diary> diaries) throws IOException {
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -64,7 +65,9 @@ public class JsonUtils {
         }
     }
 }
-class LocalDateTimeSerializer implements JsonSerializer< LocalDateTime > {
+
+// Below are classes needed to serialize and deserialize a custom datetime-format for GSON.
+class LocalDateTimeSerializer implements JsonSerializer<LocalDateTime> {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
@@ -72,12 +75,12 @@ class LocalDateTimeSerializer implements JsonSerializer< LocalDateTime > {
         return new JsonPrimitive(formatter.format(localDateTime));
     }
 }
-class LocalDateTimeDeserializer implements JsonDeserializer < LocalDateTime > {
+
+class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
     @Override
-    public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
+    public LocalDateTime deserialize(JsonElement json, Type typeOfT,
+                                     JsonDeserializationContext context) throws JsonParseException {
         return LocalDateTime.parse(json.getAsString(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withLocale(Locale.ENGLISH));
-//                DateTimeFormatter.ofPattern("d::MMM::uuuu HH::mm::ss").withLocale(Locale.ENGLISH));
     }
 }
