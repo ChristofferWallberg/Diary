@@ -1,3 +1,7 @@
+package model;
+
+import util.JsonUtils;
+
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,7 +18,7 @@ public class Diary {
     }
 
     /**
-     * Create and save new Diary Entry to JSON in the current users diary.
+     * Create and save new model.Diary Entry to JSON in the current users diary.
      * @param diaries
      * @param scannerTitle
      * @param scannerText

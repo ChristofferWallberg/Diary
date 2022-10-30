@@ -1,3 +1,7 @@
+package model;
+
+import util.JsonUtils;
+
 import java.io.IOException;
 import java.util.List;
 

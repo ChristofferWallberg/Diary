@@ -1,4 +1,9 @@
+package util;
+
 import com.google.gson.*;
+import model.Diary;
+import model.User;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Path;

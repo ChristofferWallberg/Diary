@@ -1,3 +1,9 @@
+import model.Diary;
+import model.DiaryEntry;
+import model.Menu;
+import model.User;
+import util.JsonUtils;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -15,7 +21,7 @@ public class Main {
         int choice = 0;
         //Begin at menu 1 before you have chosen a user.
         int menu = 1;
-//        Menu that shows options:
+//        model.Menu that shows options:
 //        1. Välj användare
 //        2. Skapa ny användare
 //        3. Avsluta
@@ -55,7 +61,7 @@ public class Main {
                             System.out.println("Du angav inte ett giltigt val, försök igen.");
                             choice = 0;
                             break;
-                        // Create new user and a new Diary for the user. Add this Diary to the list of diaries.
+                        // Create new user and a new model.Diary for the user. Add this model.Diary to the list of diaries.
                         case 2:
                             System.out.println("\t1) Fortsätt\n" +
                                     "\t2) Avbryt");
@@ -83,7 +89,7 @@ public class Main {
                     scanner.nextLine();
                 }
             }
-            // Menu for logged in user
+            // model.Menu for logged in user
             if (menu == 2) {
                 User.getLoggedInUser();
                 Menu.getMenu(menu);
@@ -96,7 +102,7 @@ public class Main {
                                 currentDiary.printDiaryEntriesCurrentUser(currentDiary);
                             }
                             break;
-                        //Create a Diary entry and put it inside current users Diary.
+                        //Create a model.Diary entry and put it inside current users model.Diary.
                         case 2:
                             System.out.println("\t1) Fortsätt\n" +
                                     "\t2) Avbryt");
